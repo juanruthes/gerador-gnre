@@ -1,0 +1,82 @@
+* {
+  font-family: "Manrope", sans-serif;
+}
+
+body {
+  margin-top: 1%;
+  color: #ffffff;
+  min-height: 100 vh;
+  background: linear-gradient(90deg, #23238e 0%, black 100%);
+  display: block;
+  justify-content: left;
+  align-items: left;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  /* Importantissimo para criar a margem da pagina centralizada conforme design */
+}
+
+.cabecalho {
+  display: block;
+}
+
+#titulo {
+  color: #ffffff;
+  margin: 0 0 0 950px;
+  position: absolute;
+  font-weight: bold;
+  top: 30px;
+  font-size: 25px;
+}
+
+h3 {
+  margin: 0;
+}
+
+.form-file {
+  margin: 15px;
+  padding-left: 100px;
+
+}
+
+.file-name-1 {
+  /*  margin-top: 20px;  */
+  padding: 5px;
+}
+
+.container-button {
+  padding: 30px;
+}
+
+.btn-form {
+  display: inline;
+}
+
+.buttons {
+  display: inline-block;
+}
+
+
+button{
+  padding: 20px 50px;
+  cursor: pointer;
+  background-color: white;
+  display: block;
+  width: 900px;
+  color: black;
+  transition: all 0.6s ease 0s;
+  text-align: center;
+  font-size: 20px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+.container-inputs .form-button-home{
+      margin-top: 100px;
+}

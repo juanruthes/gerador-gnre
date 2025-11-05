@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/difal-st.css') }}"  />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <title>Trox do Brasil | Gerador de Gnre</title>
+  </head>
+
+  <header class="container cabecalho">
+      <h1>
+        <img src= "{{url_for('static', filename='images/logo trox.png')}}" class="logo" href="index.html">
+      </h1>
+      <h2 id="titulo">Gerador de GNRE de ICMS com Substituição Tributária</h1>
+  </header>
+  <body>
+      <div class="container container-inputs">
+        <form method="POST" action="/data-difal-st" enctype="multipart/form-data" >
+          <div>
+            <div class="form-file">
+              <label for="file-3">Importar planilha da sessão "Linhas da NFE"</label>
+              <input type="file" name="file-3" id="file-3"/>
+              <p class="description-plan">Código da planilha: cizlic502mt00</p>
+              <div class="span">
+                <span class='file-name-3'></span>
+              </div>
+            </div>
+            <div class="form-file">
+              <label for="file-4">Importar "Notas fiscais"</label>
+              <input type="file" name="file-4" id="file-4" />
+              <p class="description-plan">Código da planilha: cislil504m00l</p>
+              <div class="span">
+                <span class='file-name-4'></span>
+              </div>
+            </div>
+          </div>
+          <div class="button-form">
+            <div class="button-save">
+              <button type="submit" value="submit" class="btn-sumbit">Salvar arquivos importados</button>
+            </div>
+            <div class="div-msg-save">
+              <p class="msg-save">{{msg}}</p>
+            </div>
+          </div>
+        </form>
+
+        <div class="button-form-ap">
+          <form method="POST" action="/gerar-ap" enctype="multipart/form-data">
+            <div class="button-ap">
+                <button type="submit" value="submit" class="btn-sumbit">Gerar Ap no LN</button>
+              </div>
+          </form> 
+        </div>
+        
+        <div class="button-data-aprovador">
+            <div>
+              <form             
+              method="POST"
+              enctype="multipart/form-data"
+              action="/gerar-ap">
+                <label>Aprovador</label>
+                <input type="radio" class="btn-aprovador" name="check-aprovador" checked> Marco Alves </input>
+                <input type="radio" class="btn-aprovador" name="check-aprovador" > Otavio </input>
+                <input type="radio" class="btn-aprovador" name="check-aprovador" > Stefan </input>
+              </form>
+            </div>
+        </div>
+      </div>
+
+      <div class="container container-button">
+        <div class="buttons">
+          <form
+            method="POST"
+            enctype="multipart/form-data"
+            action="/static/data/planilha-gerada"
+            class="btn-form"
+          >
+            <div class="button-data-ap">
+              <label>Data vencimento</label>
+              <input type="date" class="btn-data" name="vencimento-data"/>
+            </div>
+            <button>Gerar Planilha .xlsx</button>
+          </form>
+        </div>
+
+
+
+      <div class="container container-table">
+        <table>
+          <h3> Guias geradas:
+            {% for table in tables %}
+            <h4>{{titles[loop.index]}}</h4>
+              {{ table | safe }} {% endfor %}
+          </h3>
+        </table>
+      </div>
+
+      <div class="container container-downloads">
+        <div>
+          <i class="fa-solid fa-file-excel">
+            <a class="text-download" href="{{ url_for('static', filename='data/arquivo-nao-contribuinte/Não Contribuintes.xlsx') }}" download>
+              Download Excel
+            </a>
+          </i>
+        </div>
+        <div>
+          <i class="fa-solid fa-download">
+            <a class="text-download" href="{{ url_for('static', filename='data/xml/loteGNRE.xml') }}" download
+            >
+            Download XML
+            </a
+          ></i>
+        </div>
+      </div>
+
+      <div>
+      <div class="container">
+        <div class="buttons">
+          <form
+            method="POST"
+            enctype="multipart/form-data"
+            action="/ler-barcode"
+            class="btn-form"
+          >
+            <div class="button-data-ap">
+            <button>Gerar Planilha c/ código de barras</button>
+          </form>
+        </div>
+
+        <i class="fa-solid fa-file-excel">
+          <a class="text-download" href="{{ url_for('static', filename='data/arquivo-nao-contribuinte/NCT cód barras.xlsx') }}" download>
+          Download Arquivo com Código de Barras 
+          </a
+        >
+        <p class="msg-save-2">{{msg2}}</p>
+        </i>
+    </div>
+
+    <div class="container container-table">
+      <table>
+        <h3>
+          {% for table in tables2 %}
+          <h4>{{titles[loop.index]}}</h4>
+            {{ table | safe }} {% endfor %}
+        </h3>
+      </table>
+    </div>
+  </body>
+
+  <footer class="container container-footer">
+    <p>2025, TROX do Brasil LTDA, Faturamento</p>
+  </footer>
+    
+  <script>
+    document.querySelector("#file-3").addEventListener("change", function () {
+      document.querySelector(".file-name-3").textContent = this.files[0].name;
+    });
+
+    document.querySelector("#file-4").addEventListener("change", function () {
+      document.querySelector(".file-name-4").textContent = this.files[0].name;
+    });
+
+    // Data de vencimento
+    const dataVenc = document.querySelector(".btn-data")
+
+    dataVenc.addEventListener("change", function (e) {
+      console.log(dataVenc.value)
+    });
+
+    let d = new Date();
+    console.log(d);
+
+
+
+    
+
+  </script>
+</html>

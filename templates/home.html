@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/home.css') }}"  />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <title>Trox do Brasil | Gerador de Gnre</title>
+  </head>
+
+  <header class="container cabecalho">
+      <h1>
+        <img src= "{{url_for('static', filename='images/logo trox.png')}}" class="logo" href="home.html">
+      </h1>
+      <h2 id="titulo">Gerador de GNRE</h1>
+  </header>
+  <body>
+      <div class="container container-inputs form-button-home">
+           <div class="form-file">
+              <form action="/gerador-nao-contribuinte" enctype="multipart/form-data">
+                <button for="file-1">Gerar guia para não contribuinte</button>
+              </form>
+            </div>  
+            <div class="form-file">
+              <form action="/gerador-difal-st" enctype="multipart/form-data">
+                <button for="file-2">Gerar guia para DIFAL ST</button>
+              </form>    
+            </div>
+          </div>
+      </div>
+</html>
