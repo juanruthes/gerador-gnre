@@ -19,7 +19,7 @@ def geracao_plan_nct():
 
 
     linhas_nfe.drop(['Import Status',
-                    'Import Code',
+                     'Import Code',
                      'Import Message',
                      'Companhia',
                      'Data de emissão',
@@ -72,12 +72,8 @@ def geracao_plan_nct():
                      'Percentual de comissão',
                      'Documento Contab.',
                      'Descrição.1',
-                     'Unnamed: 28',
-                     'Unnamed: 21',
                      'Valor UF Remetente',
-                     'Unnamed: 67',
                      'ICMS',
-                     'Unnamed: 73',
                      ],
                     axis=1, inplace=True)
     linhas_nfe
@@ -130,8 +126,6 @@ def geracao_plan_nct():
                      'Endereço para faturamento',
                      'PN receptor',
                      'Código do tipo de doc. fiscal',
-                     'Unnamed: 32',
-                     'Unnamed: 20',
                      'Consumidor final',
                      ],
                     axis=1, inplace=True)
@@ -155,7 +149,6 @@ def geracao_plan_nct():
                    'Companhia',
                    'Endereço',
                    'Status',
-                   'Unnamed: 10',
                    'CEP/Código postal',
                    'País',
                    'Moeda',
@@ -164,7 +157,6 @@ def geracao_plan_nct():
                    'Número de telefone',
                    'A ser verificado',
                    'Parceiro de negócios pai',
-                   'Unnamed: 21',
                    ],
                   axis=1, inplace=True)
     cadastro
@@ -200,7 +192,6 @@ def geracao_plan_nct():
     notafiscal = notafiscal.dropna(subset=['Valor Total DIFAL'])
     notafiscal
     notafiscal.drop(['Parceiro de negócios',
-                    'Unnamed: 5',
                      'Endereço.1',
                      'Número do documento_y',
                      'Departamento_y',
@@ -208,6 +199,11 @@ def geracao_plan_nct():
                      'Razão Social',
                      'Estado',
                      'CNPJ Parceiro',
+                     'Valor total da agenda (child)',
+                    'Transportadora (child)',
+                    'Parceiro de negócios (child)',
+                    'Endereço (child)',
+                    'Parceiro de negócios pai (child)',
                      ],
                     axis=1, inplace=True)
     notafiscal
@@ -283,7 +279,7 @@ def geracao_plan_nct():
     notafiscal["DT Venc LN"] = notafiscal["DT Venc LN"].dt.strftime('%d/%m/%Y')
     notafiscal["Data de vencimento"] = notafiscal["Data de vencimento"].dt.strftime('%Y-%m-%d')
 
-    notafiscal = notafiscal.rename(columns={"NFE":"NFE", "Unnamed: 12":"Razão Social", "Departamento_x":"Departamento", "Estado/Município": "UF", "Parceiro de negócios faturado":"PN", "Número do documento_x":"NFE", "Valor Fundo Combate Pobreza":"Valor FCP"})
+    notafiscal = notafiscal.rename(columns={"NFE":"NFE", "Parceiro de negócios faturado (child)":"Razão Social", "Departamento_x":"Departamento", "Estado/Município": "UF", "Parceiro de negócios faturado":"PN", "Número do documento_x":"NFE", "Valor Fundo Combate Pobreza":"Valor FCP"})
 
 
     notafiscal.to_excel("static/data/arquivo-nao-contribuinte/Não Contribuintes.xlsx", index=False)
